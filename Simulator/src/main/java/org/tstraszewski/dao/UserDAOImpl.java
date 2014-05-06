@@ -10,15 +10,17 @@ import org.tstraszewski.model.UserEntity;
 @Repository("userDao")
 public class UserDAOImpl implements UserDAO {
 
+	/*
+	 * Zobaczyc JPA
+	 */
+	
 	private static String ALL_USERS_QUERY = "FROM Users";
 	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	public void addUser(UserEntity u) {
-		
 		this.sessionFactory.getCurrentSession().save(u);
-		this.sessionFactory.getCurrentSession().flush();
 	}
 
 	public void deleteUser(UserEntity u) {

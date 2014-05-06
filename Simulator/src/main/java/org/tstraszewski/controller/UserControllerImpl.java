@@ -34,8 +34,6 @@ public class UserControllerImpl implements UserController {
 	}
 
 	public void deleteUser(UserEntity u) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@RequestMapping(value="/getAll",method = RequestMethod.GET)
