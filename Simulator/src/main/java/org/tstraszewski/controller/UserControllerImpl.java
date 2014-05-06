@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.tstraszewski.model.FlyHistoryEntity;
 import org.tstraszewski.model.UserEntity;
+import org.tstraszewski.service.FlyHistoryService;
 import org.tstraszewski.service.UserService;
 
 @Controller
@@ -22,6 +24,9 @@ public class UserControllerImpl implements UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private FlyHistoryService flyHistoryService;
+	
 	@RequestMapping(method = RequestMethod.POST)
 	public void addUser(@RequestBody final UserEntity user) {
 		if(logger.isDebugEnabled()){
@@ -29,8 +34,20 @@ public class UserControllerImpl implements UserController {
 			logger.debug("Otrzymalem: " + user);
 		}
 		
-		userService.addUser(user);
+		userService.add(user);
 		
+		
+		
+		if(logger.isDebugEnabled()){
+			List<UserEntity> l = userService.getAll();
+			for (UserEntity userEntity : l) {
+				logger.debug(l);
+			}
+			List<FlyHistoryEntity> ll = flyHistoryService.getAll();
+			for(FlyHistoryEntity fh : ll){
+				logger.debug(fh);
+			}
+		}
 	}
 
 	public void deleteUser(UserEntity u) {

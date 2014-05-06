@@ -11,10 +11,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Users")
-public class UserEntity implements Serializable {
+public class UserEntity extends BaseEntity implements Serializable {
 	
-	private String name;
-	private int age;
+	private String nickName;
+	private String firstName;
+	private String lastName;
+	private String password;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -24,20 +26,36 @@ public class UserEntity implements Serializable {
 	public UserEntity() {
 	}
 
-	public String getName() {
-		return name;
+	public String getNickName() {
+		return nickName;
+	}
+	
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public int getAge() {
-		return age;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public long getId() {
@@ -46,5 +64,12 @@ public class UserEntity implements Serializable {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "UserEntity [nickName=" + nickName + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", password=" + password + ", id="
+				+ id + "]";
 	}
 }

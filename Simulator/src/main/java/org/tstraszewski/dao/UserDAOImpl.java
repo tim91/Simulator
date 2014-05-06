@@ -1,35 +1,20 @@
 package org.tstraszewski.dao;
 
-import java.util.List;
-
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.tstraszewski.model.UserEntity;
 
-@Repository("userDao")
-public class UserDAOImpl implements UserDAO {
+@Repository("userDAO")
+public class UserDAOImpl extends BaseDAOImpl<UserEntity> implements UserDAO {
 
 	/*
 	 * Zobaczyc JPA
 	 */
+	private static String ALL_USERS_QUERY = "from UserEntity";
 	
-	private static String ALL_USERS_QUERY = "FROM Users";
-	
-	@Autowired
-	private SessionFactory sessionFactory;
-	
-	public void addUser(UserEntity u) {
-		this.sessionFactory.getCurrentSession().save(u);
+	public UserDAOImpl() {
+		super(ALL_USERS_QUERY);
 	}
 
-	public void deleteUser(UserEntity u) {
-		this.sessionFactory.getCurrentSession().delete(u);
-	}
-
-	public List<UserEntity> getAllUsers() {
-		List l = this.sessionFactory.getCurrentSession().createQuery(ALL_USERS_QUERY).list();
-		return l;
-	}
 
 }
