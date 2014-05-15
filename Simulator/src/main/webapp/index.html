@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="Author" content="Radosław Ziembiński"/>
+<meta name="Copyright" content="Poznań Universtiy of Technolgy, 2014"/>
+<meta name="Description" content="Laboratories: Technologie programistyczne systemy internetowe - teaching materials"/>
+
+<title>Symulator lotu</title>
+<link href="css/mainpage.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="javascript/three/three.js"></script>
+<script type="text/javascript" src="javascript/simulator.js"></script>
+<script type="text/javascript" src="javascript/canvasjs.min.js"></script>
+<script type="text/javascript" src="javascript/plot.js"></script>
+</head>
+<body>
+	<div id="view3d"></div>
+
+	<table class="results">
+		<thead>
+			<tr>
+				<td>Dimension</td>
+				<td>Velocity [m/s]</td>
+				<td>Direction</td>
+				<td>Forces [N]</td>
+				<td>Position [m]</td>
+				<td>Height [m]</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>X</td>
+				<td><div id="vel1"></div></td>
+				<td><div id="dir1"></div></td>
+				<td><div id="for1"></div></td>
+				<td><div id="pos1"></div></td>
+				<td><div id="hoh1"></div></td>
+			</tr>
+			<tr>
+				<td>Y(height)</td>
+				<td><div id="vel2"></div></td>
+				<td><div id="dir2"></div></td>
+				<td><div id="for2"></div></td>
+				<td><div id="pos2"></div></td>
+				<td><div id="cra1"></div></td>
+			</tr>
+			<tr>
+				<td>Z</td>
+				<td><div id="vel3"></div></td>
+				<td><div id="dir3"></div></td>
+				<td><div id="for3"></div></td>
+				<td><div id="pos3"></div></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table class="controls">
+		<thead>
+			<tr>
+				<td>Roll</td>
+				<td>Pitch</td>
+				<td>Yaw</td>
+				<td>Engine</td>
+				<td>Autopilot</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><button id="rollA">+</button></td>
+				<td><button id="pitchA">+</button></td>
+				<td><button id="yawA">+</button></td>
+				<td><button id="engineA">+</button></td>
+				<td><button id="ap">Disabled</button></td>
+			</tr>
+			<tr>
+				<td><button id="rollB">-</button></td>
+				<td><button id="pitchB">-</button></td>
+				<td><button id="yawB">-</button></td>
+				<td><button id="engineB">-</button></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><div id="rollV"></div></td>
+				<td><div id="pitchV"></div></td>
+				<td><div id="yawV"></div></td>
+				<td><div id="engineV"></div></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<button onclick="init()">Start</button>
+	<button onclick="stop()">Stop</button>
+
+
+
+	<div id="plots">
+	  <div id="accelerationPlot">
+	  </div>
+	
+	   <div id="speedPlot">
+		</div>
+	</div>
+
+	
+
+	<script type="text/javascript">
+		
+	</script>
+</body>
+</html>
