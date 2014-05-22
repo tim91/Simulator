@@ -4,24 +4,24 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
+
 @Entity
+@SequenceGenerator(initialValue=1, name="baseSequence", sequenceName = "user_sequence")
 @Table(name="Users")
 public class UserEntity extends BaseEntity implements Serializable {
 	
+	@Column(unique=true, nullable=false)
 	private String nickName;
 	private String firstName;
 	private String lastName;
+	@Column(nullable=false)
+	@Length(min=6, max=15)
 	private String password;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id", unique=true, nullable=false)
-	private long id;
+
 
 	public UserEntity() {
 	}
@@ -58,18 +58,10 @@ public class UserEntity extends BaseEntity implements Serializable {
 		this.password = password;
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	@Override
 	public String toString() {
 		return "UserEntity [nickName=" + nickName + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", password=" + password + ", id="
-				+ id + "]";
+				+ super.getId() + "]";
 	}
 }

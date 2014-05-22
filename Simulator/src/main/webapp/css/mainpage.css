@@ -31,3 +31,15 @@ Laboratories: Technologie programistyczne systemy internetowe - teaching materia
 #accelerationPlot{
 	width: 80%; height:400px;
 }
+
+#startDataForm{
+	display: table-caption;
+}
+
+.startDataFormFields{
+	display: block;
+}
+
+#startDataFormSet{
+	display: flex;
+}

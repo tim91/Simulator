@@ -100,6 +100,8 @@ Land.prototype = {
 				var height = random() * hillsMaxHeight + hillsMaxHeight;
 				var width = random() * hillsMaxWidth + hillsBaseWidth;
 
+//				console.log(rkx + " " + rky + " " + height + " " + width);
+				
 				var k = new Kernel();
 				k.setup(rkx, rky, height, width);
 				kernelArrays[xl][yl].push(k);

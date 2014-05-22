@@ -4,36 +4,25 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
+@SequenceGenerator(initialValue = 1, name="baseSequence", sequenceName = "fly_history_sequence")
 @Table(name="FlyHistory")
 public class FlyHistoryEntity extends BaseEntity implements Serializable{
-
-	@MapsId @ManyToOne
+	
+	@ManyToOne
 	private UserEntity userId;
-	private String description;
-	
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id", unique=true,nullable=false)
-	private long id;
+	private int posX;
+	private int posY;
+	private int posZ;
+	private int velX;
+	private int velY;
+	private int velZ;
 	
 	public FlyHistoryEntity() {
-	}
-	
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public UserEntity getUserId() {
@@ -44,19 +33,62 @@ public class FlyHistoryEntity extends BaseEntity implements Serializable{
 		this.userId = userId;
 	}
 
-	public String getDescription() {
-		return description;
+	public int getPosX() {
+		return posX;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+
+	public int getPosZ() {
+		return posZ;
+	}
+
+	public void setPosZ(int posZ) {
+		this.posZ = posZ;
+	}
+
+	public int getVelX() {
+		return velX;
+	}
+
+	public void setVelX(int velX) {
+		this.velX = velX;
+	}
+
+	public int getVelY() {
+		return velY;
+	}
+
+	public void setVelY(int velY) {
+		this.velY = velY;
+	}
+
+	public int getVelZ() {
+		return velZ;
+	}
+
+	public void setVelZ(int velZ) {
+		this.velZ = velZ;
 	}
 
 	@Override
 	public String toString() {
-		return "FlyHistoryEntity [id=" + id + ", userId=" + userId
-				+ ", description=" + description + "]";
+		return "FlyHistoryEntity [userId=" + userId + ", posX=" + posX
+				+ ", posY=" + posY + ", posZ=" + posZ + ", velX=" + velX
+				+ ", velY=" + velY + ", velZ=" + velZ + "]";
 	}
+
+	
 	
 	
 }

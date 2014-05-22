@@ -95,8 +95,11 @@ var plane = new Plane();
 plane.crashed = true;
 var renderer = null;
 
+var startParamters = function(){
+	
+}
 
-var startFlying = function(){
+var startFlying = function(vals){
 	// XZ - horizontal plane, Y - height
 	plane = new Plane();
 	var land = new Land(2245, 10000, 10000, 5);
@@ -243,7 +246,7 @@ var startFlying = function(){
 				mesh.setRotationFromMatrix(plane.rotationMatrix);
 				//meshes[1].matrixAutoUpdate = false;
 				//meshes[1].updateMatrix();
-
+//				point = getPositionForCamera(x,y,z);
 				camera.position.set(plane.pos.x - 4000.0, plane.pos.y - 200.0, plane.pos.z);
 				camera.lookAt(plane.pos);
 				mesh.position.set(plane.pos.x, plane.pos.y, plane.pos.z);
@@ -346,13 +349,47 @@ var stop = function(){
 		removeChild("speedPlot");
 		removeChild("accelerationPlot");
 	}
-	clearAnimation();
+//	clearAnimation();
 	plane.crashed = true;
+	location.reload();
 }
+
+var formFields = [];
+
+$(document).ready(function(){
+	formFields.push('#posX');
+	formFields.push('#posY');
+	formFields.push('#posZ');
+	formFields.push('#velX');
+	formFields.push('#velY');
+	formFields.push('#velZ');
+	
+	
+	/*
+	 * For test
+	 */
+	setVal('#posX',3);
+	setVal('#posY',3);
+	setVal('#posZ',3);
+	setVal('#velX',3);
+	setVal('#velY',3);
+	setVal('#velZ',3);
+	});
+
+
+var setVal = function(id,val){
+	$(id).val(val);
+};
 
 var init = function(){
 
 	if(plane.crashed == true){
+		var vals = readDataFromForm();
+		
+		if(vals == null)
+			return;
+		
+		saveStartDataOnServer(vals);
 		
 		if(renderer == null){
 			renderer = new THREE.WebGLRenderer();
@@ -360,17 +397,65 @@ var init = function(){
 			document.getElementById("view3d").appendChild(renderer.domElement);
 		}
 		
-		startFlying();
+		startFlying(vals);
 		renderPlots();
 	}
 	
-}
+};
 
-var getFlyMetadata = function(){
-	console.log("Pobieram dane na serwer....")
-}
+
+
+var readDataFromForm = function(){
+	
+	var len = formFields.length;
+	var valid = true;
+	var vals = {};
+	for(var i=0;i<len;i++){
+		el = formFields[i];
+		val = getValueAndValidate(el);
+		if(isNaN(val) || val < 0){
+			valid = false;
+			console.log("Invalid: " + el);
+			addClass($(el).parent(),'has-error');
+		}else{
+			vals[el.substr(1)] = val;
+			console.log("Valid: " + el);
+		}
+	}
+	
+	return valid == true ? vals : null;
+};
+
+var getValueAndValidate = function(id){
+	posX = $(id).val();
+	px = parseInt(posX);
+	return px;
+};
+
+var saveStartDataOnServer = function(vals){
+	
+	console.log("Wysylam dane na serwer....");
+	vals = JSON.stringify(vals);
+	sendPost("/flyHistory",vals);
+};
+
+var addClass = function (id,className){
+	$(id).addClass(className);
+};
 
 var removeChild = function(elementId){
 	var childs=document.getElementById(elementId);
 	childs.removeChild(childs.childNodes[0]);
-}
+};
+
+var readStartData = function(){
+	
+};
+
+var getPositionForCamera = function(x,y,z){
+	
+	/*
+	 * W zaleznosci od flagi
+	 */
+	return [x,y,z];
+};

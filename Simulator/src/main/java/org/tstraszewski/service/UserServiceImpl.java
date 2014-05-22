@@ -9,4 +9,8 @@ import org.tstraszewski.model.UserEntity;
 @Transactional
 public class UserServiceImpl extends BaseServiceImpl<UserDAOImpl, UserEntity> implements UserService {
 
+	public UserEntity getByName(String name) {
+		return dao.getUserByName(name);
+	}
+
 }

@@ -15,8 +15,9 @@
 		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx.xsd"> 
-  <import resource="classpath:/context/application-context.xml"/>
-   
+  <!--<import resource="classpath:/context/application-context.xml"/>
+   <import resource="classpath:/context/security-context.xml"/>-->
+
    <mvc:annotation-driven/>
    <context:component-scan base-package="org.tstraszewski.controller" />
     
@@ -26,5 +27,6 @@
       <property name="suffix" value=".jsp" />
    </bean>
    
+  
    
 </beans>
