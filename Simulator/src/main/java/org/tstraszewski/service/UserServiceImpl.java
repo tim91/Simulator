@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tstraszewski.dao.UserDAOImpl;
 import org.tstraszewski.model.UserEntity;
 
-@Service
+@Service("userService")
 @Transactional
 public class UserServiceImpl extends BaseServiceImpl<UserDAOImpl, UserEntity> implements UserService {
 

@@ -1,4 +1,4 @@
-package org.tstraszewski.service;
+package org.tstraszewski.service.auth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Service;
 import org.tstraszewski.model.UserEntity;
+import org.tstraszewski.service.UserService;
 
+@Service("customAuthenticationProvider")
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
@@ -32,7 +35,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		
 		String pass = (String)arg0.getCredentials();
 		
-		if(!ue.getPassword().equals(pass)){
+		if(!ue.getPasswordHashed().equals(pass)){
 			return null;
 		}
 		

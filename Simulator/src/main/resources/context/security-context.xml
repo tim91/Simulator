@@ -6,17 +6,68 @@
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/security
                            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
- 
+
+ <!--
 	<security:http auto-config="true">
-		<security:intercept-url pattern="/**" access="ROLE_USER" />
+		<security:intercept-url pattern="/rest/**" access="ROLE_USER"/>
+		<security:intercept-url pattern="/documentation" ref="digestFilter" access="ROLE_USER"/>
 	</security:http>
- 
- 	<bean id="customAuthenticationProvider" class="org.tstraszewski.service.CustomAuthenticationProvider"/>
  
  
 	<security:authentication-manager>
-	  <security:authentication-provider ref="customAuthenticationProvider">
-	  </security:authentication-provider>
+	  <security:authentication-provider ref="customAuthenticationProvider"/>
 	</security:authentication-manager>
- 
+	
+	<bean id="digestFilter"
+      class="org.springframework.security.web.authentication.www.DigestAuthenticationFilter">
+        <property name="userDetailsService" ref="userService" />
+        <property name="authenticationEntryPoint" ref="digestEntryPoint" />
+    </bean>
+    <bean id="digestEntryPoint" 
+      class="org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint">
+        <property name="realmName" value="Contacts Realm via Digest Authentication" />
+        <property name="key" value="acegi" />
+    </bean>
+    
+-->
+
+<security:authentication-manager alias="baseAuthenticationManager">
+    <security:authentication-provider ref="customAuthenticationProvider"/>
+</security:authentication-manager>
+<!--
+<bean id="digestAuthenticationManager" class="org.springframework.security.authentication.ProviderManager">
+    <constructor-arg>
+        <list>
+            <bean class="org.tstraszewski.service.auth.DigestUserDetailsService"/>
+        </list>
+    </constructor-arg>
+</bean>
+-->
+	<security:http pattern="/rest/users/**" use-expressions="true" authentication-manager-ref="baseAuthenticationManager">
+		<security:intercept-url pattern="/**" access="ROLE_ANONYMOUS"/>
+		<security:form-login login-page="/login" authentication-failure-url="/failure"/>
+        <security:logout logout-url="/logout" logout-success-url="/login"/>
+        <security:access-denied-handler error-page="/denied"/>
+        
+        <!--<security:anonymous enabled="false"/>-->
+    </security:http>
+
+    <security:http pattern="/rest/flyHistory/**" use-expressions="true" disable-url-rewriting="true" entry-point-ref="digestEntryPoint">
+    	<security:intercept-url pattern="/**" access="isAuthenticated()"/>
+        <security:custom-filter ref="digestFilter" after="BASIC_AUTH_FILTER"/>
+    </security:http>
+    
+    <bean id="digestFilter"
+      class="org.springframework.security.web.authentication.www.DigestAuthenticationFilter">
+        <property name="userDetailsService" ref="digestUserDetailsService" />
+        <property name="authenticationEntryPoint" ref="digestEntryPoint" />
+    </bean>
+    <bean id="digestEntryPoint" 
+      class="org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint">
+        <property name="realmName" value="Contacts Realm via Digest Authentication" />
+        <property name="key" value="acegi" />
+    </bean>
+    
+    
+
 </beans>

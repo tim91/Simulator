@@ -20,7 +20,10 @@ public class UserEntity extends BaseEntity implements Serializable {
 	private String lastName;
 	@Column(nullable=false)
 	@Length(min=6, max=15)
-	private String password;
+	private String passwordDigest;
+	@Column(nullable=false)
+	@Length(min=6, max=15)
+	private String passwordHashed;
 
 
 	public UserEntity() {
@@ -49,19 +52,29 @@ public class UserEntity extends BaseEntity implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
-	public String getPassword() {
-		return password;
+
+	public String getPasswordDigest() {
+		return passwordDigest;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPasswordDigest(String passwordDigest) {
+		this.passwordDigest = passwordDigest;
+	}
+
+	public String getPasswordHashed() {
+		return passwordHashed;
+	}
+
+	public void setPasswordHashed(String passwordHashed) {
+		this.passwordHashed = passwordHashed;
 	}
 
 	@Override
 	public String toString() {
 		return "UserEntity [nickName=" + nickName + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", password=" + password + ", id="
-				+ super.getId() + "]";
+				+ ", lastName=" + lastName + ", passwordDigest="
+				+ passwordDigest + ", passwordHashed=" + passwordHashed + "]";
 	}
+	
+	
 }
