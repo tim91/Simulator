@@ -20,12 +20,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	@Autowired
 	UserService userService;
 	
-	
 	public Authentication authenticate(Authentication arg0)
 			throws AuthenticationException {
 		String name = arg0.getName();
 		
-		
+		System.out.println("custom auth");
 		UserEntity ue = userService.getByName(name);
 		
 		if(ue == null){
@@ -40,7 +39,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		}
 		
 		List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
-        grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
+        grantedAuths.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         Authentication auth = new UsernamePasswordAuthenticationToken(name, pass, grantedAuths);
 		return auth;
 		

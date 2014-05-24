@@ -31,9 +31,12 @@
     
 -->
 
+
 <security:authentication-manager alias="baseAuthenticationManager">
-    <security:authentication-provider ref="customAuthenticationProvider"/>
+    <security:authentication-provider ref="digestUserDetailsService"/><!-->"customAuthenticationProvider"/>-->
 </security:authentication-manager>
+
+
 <!--
 <bean id="digestAuthenticationManager" class="org.springframework.security.authentication.ProviderManager">
     <constructor-arg>
@@ -43,17 +46,19 @@
     </constructor-arg>
 </bean>
 -->
-	<security:http pattern="/rest/users/**" use-expressions="true" authentication-manager-ref="baseAuthenticationManager">
-		<security:intercept-url pattern="/**" access="ROLE_ANONYMOUS"/>
-		<security:form-login login-page="/login" authentication-failure-url="/failure"/>
+	<security:http auto-config="true" pattern="/rest/users/**">
+		<security:intercept-url pattern="/login/**" access="ROLE_ADMIN"/>
+
+		<!--<security:form-login login-page="/login" authentication-failure-url="/failure"/>
         <security:logout logout-url="/logout" logout-success-url="/login"/>
-        <security:access-denied-handler error-page="/denied"/>
-        
+        <security:access-denied-handler error-page="/denied"/>-->
         <!--<security:anonymous enabled="false"/>-->
+        
     </security:http>
 
-    <security:http pattern="/rest/flyHistory/**" use-expressions="true" disable-url-rewriting="true" entry-point-ref="digestEntryPoint">
-    	<security:intercept-url pattern="/**" access="isAuthenticated()"/>
+
+    <security:http  auto-config="true" pattern="/rest/flyHistory/**" use-expressions="false" entry-point-ref="digestEntryPoint">
+    	<security:intercept-url pattern="/**" access="ROLE_ADMIN"/>
         <security:custom-filter ref="digestFilter" after="BASIC_AUTH_FILTER"/>
     </security:http>
     
