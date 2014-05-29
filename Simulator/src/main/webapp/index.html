@@ -10,14 +10,18 @@
 <link href="css/mainpage.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrapValidator.min.css" rel="stylesheet" type="text/css" />
+
 
 <script type="text/javascript" src="javascript/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="javascript/bootstrap.min.js"></script>
+<script type="text/javascript" src="javascript/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="javascript/canvasjs.min.js"></script>
 <script type="text/javascript" src="javascript/three/three.js"></script>
 <script type="text/javascript" src="javascript/simulator.js"></script>
 <script type="text/javascript" src="javascript/plot.js"></script>
 <script type="text/javascript" src="javascript/serwerAJAX.js"></script>
+<script type="text/javascript" src="javascript/formValidator.js"></script>
 
 </head>
 <body>
@@ -32,6 +36,7 @@
 				<td>Forces [N]</td>
 				<td>Position [m]</td>
 				<td>Height [m]</td>
+				<td><a href="/Simulator/logout">Wyloguj</a></td>
 			</tr>
 		</thead>
 		<tbody>
@@ -97,43 +102,44 @@
 	</table>
 
 	
-	<form id="startDataForm" action="readStartData()" method="post">
+	<form id="startDataForm" method="post">
 		<div id="startDataFormSet">
-			<div class="startDataFormFields">
-				<div class="form-group has-error">
+			<div class="startDataFormFields poss form-group">
+				<div class="col-md-4">
 					<label class="control-label" for="posX">Pozycja X:</label>
-					<input id="posX" class="form-control" type="text">
+					<input id="posX" name="posX" class="form-control" type="text">
 				</div>
-			 	<div class="form-group">
+			 	<div class="col-md-4">
 					<label class="control-label" for="posY">Pozycja Y:</label>
-			    	<input id="posY" class="form-control" type="text">
+			    	<input id="posY" name="posY" class="form-control" type="text">
 		    	</div>
-		    	<div class="form-group">
+		    	<div class="col-md-4">
 			    	<label class="control-label" for="posZ">Pozycja Z:</label>
-			    	<input id="posZ" class="form-control" type="text">
+			    	<input id="posZ" name="posZ" class="form-control" type="text">
 		    	</div>
 			</div>
 			
-			<div class="startDataFormFields">
-				<div class="form-group">
+			<div class="startDataFormFields vels form-group">
+				<div class="col-md-4">
 					<label class="control-label" for="velX">Prędkość X:</label>
-					<input id="velX" class="form-control" type="text">
+					<input id="velX" name="velX" class="form-control" type="text">
 				</div>
-				<div class="form-group">
+				<div class="col-md-4">
 					<label class="control-label" for="velY">Prędkość Y:</label>
-			    	<input id="velY" class="form-control" type="text">
+			    	<input id="velY" name="velY" class="form-control" type="text">
 		    	</div>
-		    	<div class="form-group">
+		    	<div class="col-md-4">
 			    	<label class="control-label" for="velZ">Prędkość Z:</label>
-			    	<input id="velZ" class="form-control" type="text">
+			    	<input id="velZ" name="velZ" class="form-control" type="text" required="required">
 		    	</div>
 			</div>
 		</div>
+		<button type="submit" class="btn btn-success">Start</button>
+		<button type="reset" class="btn btn-danger" onclick="stop()">Stop</button>	
 	</form>
+	
 
-
-	<button type="button" class="btn btn-success" onclick="init()">Start</button>
-	<button type="button" class="btn btn-danger" onclick="stop()">Stop</button>
+	
 
 
 	<div id="plots">

@@ -33,9 +33,14 @@
 
 
 <security:authentication-manager alias="baseAuthenticationManager">
-    <security:authentication-provider ref="digestUserDetailsService"/><!-->"customAuthenticationProvider"/>-->
+	<security:authentication-provider user-service-ref="customUserDetailsService"/>
 </security:authentication-manager>
 
+<!--
+<security:authentication-manager id="digestAuthenticationManager">    
+	<security:authentication-provider user-service-ref="digestUserDetailsService"/>
+</security:authentication-manager>
+-->
 
 <!--
 <bean id="digestAuthenticationManager" class="org.springframework.security.authentication.ProviderManager">
@@ -46,22 +51,37 @@
     </constructor-arg>
 </bean>
 -->
-	<security:http auto-config="true" pattern="/rest/users/**">
-		<security:intercept-url pattern="/login/**" access="ROLE_ADMIN"/>
+<!-->
+	<security:http  auto-config="true" pattern="/rest/flyHistory/**" use-expressions="false" entry-point-ref="digestEntryPoint" authentication-manager-ref="digestAuthenticationManager">
+    	<security:intercept-url pattern="/rest/flyHistory/**" access="ROLE_ADMIN"/>
+        <security:custom-filter ref="digestFilter" after="BASIC_AUTH_FILTER"/>
+        
+        
+        <security:session-management>
+        	<security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+    	</security:session-management>
+        
+    </security:http>
+-->
 
-		<!--<security:form-login login-page="/login" authentication-failure-url="/failure"/>
-        <security:logout logout-url="/logout" logout-success-url="/login"/>
-        <security:access-denied-handler error-page="/denied"/>-->
-        <!--<security:anonymous enabled="false"/>-->
+	<security:http auto-config="true" pattern="/**" use-expressions="false" authentication-manager-ref="baseAuthenticationManager">
+		<security:intercept-url pattern="/rest/users/**" access="ROLE_ADMIN"/>
+
+		<security:form-login login-page="/login.html" default-target-url="/index.html" authentication-failure-url="/failure.html"/>
+        <security:logout logout-url="/logout" logout-success-url="/login.html"/>
+        <security:access-denied-handler error-page="/failure.html"/>
+        <security:anonymous enabled="false"/>
+        
+        <security:session-management>
+        	<!--<security:concurrency-control max-sessions="1" />-->
+        	<security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+    	</security:session-management>
         
     </security:http>
 
 
-    <security:http  auto-config="true" pattern="/rest/flyHistory/**" use-expressions="false" entry-point-ref="digestEntryPoint">
-    	<security:intercept-url pattern="/**" access="ROLE_ADMIN"/>
-        <security:custom-filter ref="digestFilter" after="BASIC_AUTH_FILTER"/>
-    </security:http>
     
+    <!--
     <bean id="digestFilter"
       class="org.springframework.security.web.authentication.www.DigestAuthenticationFilter">
         <property name="userDetailsService" ref="digestUserDetailsService" />
@@ -72,7 +92,7 @@
         <property name="realmName" value="Contacts Realm via Digest Authentication" />
         <property name="key" value="acegi" />
     </bean>
-    
+   -->
     
 
 </beans>

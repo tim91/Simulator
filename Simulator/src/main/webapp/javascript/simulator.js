@@ -185,6 +185,20 @@ Plane.prototype = {
 	maxCrossArea : 130.0, // surface of the plane
 	crashed : false,
 
+	setPos : function(posX,posY,posZ){
+		//tutaj podaje polozenie poczatkowe
+		with (this) {
+			pos = new THREE.Vector3(posX, posY, posZ);
+		}
+		
+	},
+	setVel : function(velX,velY,velZ){
+		//tutaj podaje predkosc poczatkowa
+		with (this) {
+			vel = new THREE.Vector3(velX, velY, velZ);
+		}
+	},
+	
 	fly : function(deltaTime) {
 		with (this) {
 			if (crashed) {

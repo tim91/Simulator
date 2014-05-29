@@ -102,6 +102,11 @@ var startParamters = function(){
 var startFlying = function(vals){
 	// XZ - horizontal plane, Y - height
 	plane = new Plane();
+	console.log(vals.posX);
+	
+	plane.setVel(vals.posX,vals.posY,vals.posZ);
+	plane.setPos(vals.velX,vals.velY,vals.velZ);
+	
 	var land = new Land(2245, 10000, 10000, 5);
 	var autopilot = new Autopilot();
 	autopilot.setup(plane, land, new THREE.Vector3(100000, 0.0, -50000));
@@ -354,15 +359,15 @@ var stop = function(){
 	location.reload();
 }
 
-var formFields = [];
+//var formFields = [];
 
 $(document).ready(function(){
-	formFields.push('#posX');
-	formFields.push('#posY');
-	formFields.push('#posZ');
-	formFields.push('#velX');
-	formFields.push('#velY');
-	formFields.push('#velZ');
+//	formFields.push('#posX');
+//	formFields.push('#posY');
+//	formFields.push('#posZ');
+//	formFields.push('#velX');
+//	formFields.push('#velY');
+//	formFields.push('#velZ');
 	
 	
 	/*
@@ -381,15 +386,15 @@ var setVal = function(id,val){
 	$(id).val(val);
 };
 
-var init = function(){
+var init = function(vals){
 
 	if(plane.crashed == true){
-		var vals = readDataFromForm();
+//		var vals = readDataFromForm();
+//		
+//		if(vals == null)
+//			return;
 		
-		if(vals == null)
-			return;
 		
-		saveStartDataOnServer(vals);
 		
 		if(renderer == null){
 			renderer = new THREE.WebGLRenderer();
@@ -398,33 +403,34 @@ var init = function(){
 		}
 		
 		startFlying(vals);
+		saveStartDataOnServer(vals);
 		renderPlots();
 	}
 	
 };
 
 
-
-var readDataFromForm = function(){
-	
-	var len = formFields.length;
-	var valid = true;
-	var vals = {};
-	for(var i=0;i<len;i++){
-		el = formFields[i];
-		val = getValueAndValidate(el);
-		if(isNaN(val) || val < 0){
-			valid = false;
-			console.log("Invalid: " + el);
-			addClass($(el).parent(),'has-error');
-		}else{
-			vals[el.substr(1)] = val;
-			console.log("Valid: " + el);
-		}
-	}
-	
-	return valid == true ? vals : null;
-};
+//
+//var readDataFromForm = function(){
+//	
+//	var len = formFields.length;
+//	var valid = true;
+//	var vals = {};
+//	for(var i=0;i<len;i++){
+//		el = formFields[i];
+//		val = getValueAndValidate(el);
+//		if(isNaN(val) || val < 0){
+//			valid = false;
+//			console.log("Invalid: " + el);
+//			addClass($(el).parent(),'has-error');
+//		}else{
+//			vals[el.substr(1)] = val;
+//			console.log("Valid: " + el);
+//		}
+//	}
+//	
+//	return valid == true ? vals : null;
+//};
 
 var getValueAndValidate = function(id){
 	posX = $(id).val();

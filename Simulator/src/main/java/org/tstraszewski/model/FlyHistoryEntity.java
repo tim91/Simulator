@@ -15,12 +15,12 @@ public class FlyHistoryEntity extends BaseEntity implements Serializable{
 	
 	@ManyToOne
 	private UserEntity userId;
-	private int posX;
-	private int posY;
-	private int posZ;
-	private int velX;
-	private int velY;
-	private int velZ;
+	private float posX;
+	private float posY;
+	private float posZ;
+	private float velX;
+	private float velY;
+	private float velZ;
 	
 	public FlyHistoryEntity() {
 	}
@@ -33,51 +33,51 @@ public class FlyHistoryEntity extends BaseEntity implements Serializable{
 		this.userId = userId;
 	}
 
-	public int getPosX() {
+	public float getPosX() {
 		return posX;
 	}
 
-	public void setPosX(int posX) {
+	public void setPosX(float posX) {
 		this.posX = posX;
 	}
 
-	public int getPosY() {
+	public float getPosY() {
 		return posY;
 	}
 
-	public void setPosY(int posY) {
+	public void setPosY(float posY) {
 		this.posY = posY;
 	}
 
-	public int getPosZ() {
+	public float getPosZ() {
 		return posZ;
 	}
 
-	public void setPosZ(int posZ) {
+	public void setPosZ(float posZ) {
 		this.posZ = posZ;
 	}
 
-	public int getVelX() {
+	public float getVelX() {
 		return velX;
 	}
 
-	public void setVelX(int velX) {
+	public void setVelX(float velX) {
 		this.velX = velX;
 	}
 
-	public int getVelY() {
+	public float getVelY() {
 		return velY;
 	}
 
-	public void setVelY(int velY) {
+	public void setVelY(float velY) {
 		this.velY = velY;
 	}
 
-	public int getVelZ() {
+	public float getVelZ() {
 		return velZ;
 	}
 
-	public void setVelZ(int velZ) {
+	public void setVelZ(float velZ) {
 		this.velZ = velZ;
 	}
 
@@ -87,8 +87,5 @@ public class FlyHistoryEntity extends BaseEntity implements Serializable{
 				+ ", posY=" + posY + ", posZ=" + posZ + ", velX=" + velX
 				+ ", velY=" + velY + ", velZ=" + velZ + "]";
 	}
-
-	
-	
 	
 }
