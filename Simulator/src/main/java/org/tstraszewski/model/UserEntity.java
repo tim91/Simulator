@@ -9,6 +9,8 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @SequenceGenerator(initialValue=1, name="baseSequence", sequenceName = "user_sequence")
 @Table(name="Users")
@@ -20,9 +22,11 @@ public class UserEntity extends BaseEntity implements Serializable {
 	private String lastName;
 	@Column(nullable=false)
 	@Length(min=6, max=15)
+	@JsonIgnore
 	private String passwordDigest;
 	@Column(nullable=false)
 	@Length(min=6, max=15)
+	@JsonIgnore
 	private String passwordHashed;
 
 

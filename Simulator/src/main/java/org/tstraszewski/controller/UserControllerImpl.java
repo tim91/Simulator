@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tstraszewski.model.UserEntity;
 import org.tstraszewski.service.UserService;
@@ -41,6 +42,14 @@ public class UserControllerImpl implements UserController {
 	public @ResponseBody List<UserEntity> getAllUsers() {
 		// TODO Auto-generated method stub
 		return userService.getAll();
+	}
+
+	@RequestMapping(value="/getId", method = RequestMethod.GET)
+	public @ResponseBody int getUserId() {
+		
+		UserEntity ue  = userService.getByName("tim91");
+		return ue.getId();
+		
 	}
 	
 	

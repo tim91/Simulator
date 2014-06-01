@@ -2,11 +2,15 @@ package org.tstraszewski.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 @Entity
 @SequenceGenerator(initialValue = 1, name="baseSequence", sequenceName = "fly_history_sequence")
@@ -14,7 +18,7 @@ import javax.persistence.Table;
 public class FlyHistoryEntity extends BaseEntity implements Serializable{
 	
 	@ManyToOne
-	private UserEntity userId;
+	private UserEntity user;
 	private float posX;
 	private float posY;
 	private float posZ;
@@ -22,15 +26,20 @@ public class FlyHistoryEntity extends BaseEntity implements Serializable{
 	private float velY;
 	private float velZ;
 	
+	private long timeLong;
+	
 	public FlyHistoryEntity() {
+		System.out.println("konstruktor: FlyHistoryEntity");
+		this.timeLong = System.currentTimeMillis();
 	}
 
+	@JsonIgnore
 	public UserEntity getUserId() {
-		return userId;
+		return user;
 	}
 
-	public void setUserId(UserEntity userId) {
-		this.userId = userId;
+	public void setUser(UserEntity user) {
+		this.user = user;
 	}
 
 	public float getPosX() {
@@ -81,11 +90,23 @@ public class FlyHistoryEntity extends BaseEntity implements Serializable{
 		this.velZ = velZ;
 	}
 
+	@JsonProperty("timeLong")
+	public long getTimeLong() {
+		return timeLong;
+	}
+
+	@JsonIgnore
+	public void setTimeLong(long timeLong) {
+		System.out.println("Przed ustawienie timeLong: " + this.timeLong);
+		this.timeLong = timeLong;
+	}
+
 	@Override
 	public String toString() {
-		return "FlyHistoryEntity [userId=" + userId + ", posX=" + posX
+		return "FlyHistoryEntity [user=" + user + ", posX=" + posX
 				+ ", posY=" + posY + ", posZ=" + posZ + ", velX=" + velX
-				+ ", velY=" + velY + ", velZ=" + velZ + "]";
+				+ ", velY=" + velY + ", velZ=" + velZ + ", timeLong="
+				+ timeLong + "]";
 	}
-	
+
 }

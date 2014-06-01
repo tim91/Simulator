@@ -95,8 +95,10 @@ var plane = new Plane();
 plane.crashed = true;
 var renderer = null;
 
-var startParamters = function(){
-	
+function insertTextNode(query) {
+	var v = document.createTextNode("");
+	document.getElementById(query).appendChild(v);
+	return v;
 }
 
 var startFlying = function(vals){
@@ -163,41 +165,14 @@ var startFlying = function(vals){
 	
 	
 
-	function insertTextNode(query) {
-		var v = document.createTextNode("");
-		document.getElementById(query).appendChild(v);
-		return v;
-	}
+	
 
 	function round(value, number) {
 		var factor = Math.pow(10, number);
 		return "" + Math.floor(value * factor) / factor;
 	}
 
-	var v1 = insertTextNode("vel1");
-	var v2 = insertTextNode("vel2");
-	var v3 = insertTextNode("vel3");
-
-	var d1 = insertTextNode("dir1");
-	var d2 = insertTextNode("dir2");
-	var d3 = insertTextNode("dir3");
-
-	var f1 = insertTextNode("for1");
-	var f2 = insertTextNode("for2");
-	var f3 = insertTextNode("for3");
-
-	var l1 = insertTextNode("pos1");
-	var l2 = insertTextNode("pos2");
-	var l3 = insertTextNode("pos3");
-
-	var r1 = insertTextNode("rollV");
-	var r2 = insertTextNode("pitchV");
-	var r3 = insertTextNode("yawV");
-	var r4 = insertTextNode("engineV");
-
-	var he = insertTextNode("hoh1");
-
-	var cr = insertTextNode("cra1");
+	
 	document.getElementById("cra1").setAttribute("crashed", "false");
 
 	document.getElementById("rollA").addEventListener("click", function(e) {
@@ -284,7 +259,7 @@ var startFlying = function(vals){
 	animate();
 
 	var deltaTime = 0.1; // secs.
-	setInterval(function() {
+	animationIntervalHandler = setInterval(function() {
 		if (plane.crashed == true) {
 			return;
 		}
@@ -343,9 +318,9 @@ var startFlying = function(vals){
 };
 
 var clearAnimation = function(){
-	scene = new THREE.Scene();
-	camera = new THREE.PerspectiveCamera(45, 800 / 400, 1, 10000);
-	renderer.render(scene, camera);
+	plane.crashed = true;
+	clearInterval(animationIntervalHandler);
+	$('#view3d').empty();
 }
 
 var stop = function(){
@@ -355,11 +330,13 @@ var stop = function(){
 		removeChild("accelerationPlot");
 	}
 //	clearAnimation();
-	plane.crashed = true;
-	location.reload();
+	
+	
+	clearAnimation();
+//	location.reload();
 }
 
-//var formFields = [];
+
 
 $(document).ready(function(){
 //	formFields.push('#posX');
@@ -369,6 +346,30 @@ $(document).ready(function(){
 //	formFields.push('#velY');
 //	formFields.push('#velZ');
 	
+	v1 = insertTextNode("vel1");
+	v2 = insertTextNode("vel2");
+	v3 = insertTextNode("vel3");
+
+	d1 = insertTextNode("dir1");
+	d2 = insertTextNode("dir2");
+	d3 = insertTextNode("dir3");
+
+	f1 = insertTextNode("for1");
+	f2 = insertTextNode("for2");
+	f3 = insertTextNode("for3");
+
+	l1 = insertTextNode("pos1");
+	l2 = insertTextNode("pos2");
+	l3 = insertTextNode("pos3");
+
+	r1 = insertTextNode("rollV");
+	r2 = insertTextNode("pitchV");
+	r3 = insertTextNode("yawV");
+	r4 = insertTextNode("engineV");
+
+	he = insertTextNode("hoh1");
+
+	cr = insertTextNode("cra1");
 	
 	/*
 	 * For test
@@ -436,6 +437,12 @@ var getValueAndValidate = function(id){
 	posX = $(id).val();
 	px = parseInt(posX);
 	return px;
+};
+
+var convertTimeFromServer = function(time){
+	
+	d = new Date().setTime(time);
+	return d;
 };
 
 var saveStartDataOnServer = function(vals){

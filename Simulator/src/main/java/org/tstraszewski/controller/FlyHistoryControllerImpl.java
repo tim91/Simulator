@@ -4,18 +4,16 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tstraszewski.model.FlyHistoryEntity;
 import org.tstraszewski.model.UserEntity;
 import org.tstraszewski.service.FlyHistoryService;
 import org.tstraszewski.service.UserService;
-import org.tstraszewski.service.auth.CustomUserDetailsService;
 
 @Controller
 @RequestMapping("/flyHistory")
@@ -35,12 +33,13 @@ public class FlyHistoryControllerImpl implements FlyHistoryController {
 		
 		System.out.println("Dodaje historie: " + fhe);
 		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
-		
-	    UserEntity us = userService.getByName(name);
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//	    String name = auth.getName();
+//		
+	    UserEntity us = userService.getByName("tim91");
 	    
-	    fhe.setUserId(us);
+	    fhe.setUser(us);
+	    
 	    
 		if(logger.isDebugEnabled()){
 			logger.debug(fhe);
@@ -62,5 +61,12 @@ public class FlyHistoryControllerImpl implements FlyHistoryController {
 		return entities;
 	}
 	
+	@RequestMapping(value="/byUserId")
+	public @ResponseBody List<Integer> getHistory(@RequestParam("userId") int userId){
+		
+		System.out.println("Userid: " + userId);
+		List<Integer> li = flyHistoryService.getByUserId(userId);
+		return li;
+	}
 	
 }
