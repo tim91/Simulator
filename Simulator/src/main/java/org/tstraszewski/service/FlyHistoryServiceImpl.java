@@ -11,10 +11,10 @@ import org.tstraszewski.model.FlyHistoryEntity;
 @Transactional
 public class FlyHistoryServiceImpl extends BaseServiceImpl<FlyHistoryDAOImpl, FlyHistoryEntity>implements FlyHistoryService {
 
-	public List<Integer> getByUserId(int userId) {
+	public List<FlyHistoryEntity> getByUserId(int userId) {
 
 		
-		List<Integer> fl = dao.getByUserId(userId);
+		List<FlyHistoryEntity> fl = dao.getByUserId(userId);
 		return fl;
 	}
 

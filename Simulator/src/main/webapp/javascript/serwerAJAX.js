@@ -1,4 +1,5 @@
-var prefix = "/Simulator/rest";
+var appName = "/Simulator";
+var prefix = appName+"/rest";
 
 var sendPost = function(uri,data){
 	
@@ -43,7 +44,7 @@ var sendGet = function(uri,param,async,function_){
                      if(result.isOk == false)
                          alert(result.message);
                      else{
-                    	 if(async){
+                    	 if(async && function_){
                  			function_(result);
                  		}
                      }

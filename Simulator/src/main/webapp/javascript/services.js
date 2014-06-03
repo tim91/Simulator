@@ -6,9 +6,17 @@ var getCurrentUserId = function(){
 	return r;
 };
 
-var getHistory = function(userId,fun){
+var getAllHistory = function(userId,fun){
 	
 	var p = [];
-	p.push('userId=' + userId);
-	sendGet("/flyHistory/byUserId",p,true,fun);
+	sendGet("/flyHistory/byUserId/" + userId,p,true,fun);
+}
+
+var getHistory = function(id){
+	res = sendGet("/flyHistory/byId/"+id,[],false,null);
+	return res.responseJSON;
+}
+
+var redirect = function(link){
+	window.location.href = appName + link;
 }

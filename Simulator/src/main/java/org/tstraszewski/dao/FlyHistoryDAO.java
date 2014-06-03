@@ -7,5 +7,5 @@ import org.tstraszewski.model.FlyHistoryEntity;
 
 public interface FlyHistoryDAO extends BaseDAO<FlyHistoryEntity> {
 	
-	public List<Integer> getByUserId(int userId);
+	public List<FlyHistoryEntity> getByUserId(int userId);
 }

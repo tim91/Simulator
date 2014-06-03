@@ -1,0 +1,11 @@
+.table{
+	max-width: 35%;
+}
+
+.rowText{
+	float: left;
+}
+
+.rowButton{
+	float: right;
+}

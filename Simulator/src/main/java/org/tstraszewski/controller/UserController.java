@@ -10,4 +10,5 @@ public interface UserController {
 	public int getUserId();
 	public void deleteUser(UserEntity u);
 	public List<UserEntity> getAllUsers();
+	public UserEntity getById(int id);
 }

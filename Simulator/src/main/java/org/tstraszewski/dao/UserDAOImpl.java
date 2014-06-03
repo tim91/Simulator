@@ -14,7 +14,7 @@ public class UserDAOImpl extends BaseDAOImpl<UserEntity> implements UserDAO {
 	private static String ALL_USERS_QUERY = "from UserEntity";
 	
 	public UserDAOImpl() {
-		super(ALL_USERS_QUERY);
+		super(ALL_USERS_QUERY,"UserEntity");
 	}
 
 	public UserEntity getUserByName(String nickName) {

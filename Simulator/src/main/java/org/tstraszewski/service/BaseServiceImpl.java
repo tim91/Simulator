@@ -26,4 +26,8 @@ public abstract class BaseServiceImpl<T extends BaseDAOImpl<S>, S extends BaseEn
 	public List<S> getAll() {
 		return this.dao.getAll();
 	}
+	
+	public S getById(int id){
+		return this.dao.getById(id);
+	}
 }

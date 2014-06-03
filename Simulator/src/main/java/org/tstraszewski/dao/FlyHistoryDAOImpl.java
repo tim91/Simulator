@@ -10,17 +10,17 @@ public class FlyHistoryDAOImpl extends BaseDAOImpl<FlyHistoryEntity> implements 
 
 	private static String ALL_FLY_HISTORY_QUERY = "FROM FlyHistoryEntity";
 	
-	private static String GET_BY_USER_ID = "select id FROM FlyHistoryEntity where user_id = '%s'";
+	private static String GET_BY_USER_ID = "FROM FlyHistoryEntity where user_id = '%s'";
 	
 	public FlyHistoryDAOImpl() {
-		super(ALL_FLY_HISTORY_QUERY);
+		super(ALL_FLY_HISTORY_QUERY,"FlyHistoryEntity");
 	}
 
-	public List<Integer> getByUserId(int userId) {
+	public List<FlyHistoryEntity> getByUserId(int userId) {
 
 		String s = String.format(GET_BY_USER_ID, userId);
 		System.out.println(s);
-		return (List<Integer>) sessionFactory.getCurrentSession().createQuery(s).list();
+		return (List<FlyHistoryEntity>) sessionFactory.getCurrentSession().createQuery(s).list();
 	}
 
 }

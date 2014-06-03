@@ -8,5 +8,5 @@ import org.tstraszewski.model.FlyHistoryEntity;
 public interface FlyHistoryService extends BaseService<FlyHistoryDAOImpl, FlyHistoryEntity> {
 
 	
-	public List<Integer> getByUserId(int userId);
+	public List<FlyHistoryEntity> getByUserId(int userId);
 }

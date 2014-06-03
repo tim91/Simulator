@@ -1,5 +1,10 @@
 $(document).ready(function() {
 	
+	applyFormValidator();
+});
+
+
+var applyFormValidator = function(){
 	var pusteMSG = 'Pole nie może być puste';
 	var notIntegerMSG = 'Wartosć nie jest liczba';
 	var valMin = 0;
@@ -119,4 +124,4 @@ $(document).ready(function() {
             init(tab);
         }
     });
-});
+}

@@ -308,7 +308,6 @@ var startFlying = function(vals){
 
 		if(plane.crashed == true){
 			cr.data = "crashed " + round(plane.flightTime, 1) + " sec.";
-			getFlyMetadata();
 		}else{
 			cr.data = "flying " + round(plane.flightTime, 1) + " sec.";
 		}
@@ -324,15 +323,13 @@ var clearAnimation = function(){
 }
 
 var stop = function(){
-	if(plane.crashed == false){
+	clearAnimation();
+	if(plane.crashed == true){
 //		removeChild("view3d");
 		removeChild("speedPlot");
 		removeChild("accelerationPlot");
 	}
-//	clearAnimation();
-	
-	
-	clearAnimation();
+	renderer = null;
 //	location.reload();
 }
 
@@ -371,21 +368,54 @@ $(document).ready(function(){
 
 	cr = insertTextNode("cra1");
 	
-	/*
-	 * For test
-	 */
-	setVal('#posX',3);
-	setVal('#posY',3);
-	setVal('#posZ',3);
-	setVal('#velX',3);
-	setVal('#velY',3);
-	setVal('#velZ',3);
+	var params = checkStartParams();
+	
+	if(params){
+		init(params);
+	}else{
+		//nie podano startowych paramterów
+		/*
+		 * For test
+		 */
+		setVal('#posX',3);
+		setVal('#posY',3);
+		setVal('#posZ',3);
+		setVal('#velX',3);
+		setVal('#velY',3);
+		setVal('#velZ',3);
+	}
+	
 	});
 
 
 var setVal = function(id,val){
 	$(id).val(val);
 };
+
+var checkStartParams = function(){
+	console.log("Sprawdzam startowe paramtery");
+	
+	params = getAllQueryStringParams();
+	
+	if(params && params.length == 6 && validate(params)){
+		return params;
+	}else{
+		return null;
+	}
+	
+}
+
+var validate = function(vals){
+	var len = vals.length;
+	for(var i = 0; i< len; i++){
+		val = parseInt(vals[i]);
+		if(!(val && (typeof val === 'number') && val >=0)){
+			console.log('Niepoprawne dane....');
+			return false;
+		}
+	}
+	return true;
+}
 
 var init = function(vals){
 
@@ -394,8 +424,6 @@ var init = function(vals){
 //		
 //		if(vals == null)
 //			return;
-		
-		
 		
 		if(renderer == null){
 			renderer = new THREE.WebGLRenderer();

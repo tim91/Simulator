@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,6 +51,13 @@ public class UserControllerImpl implements UserController {
 		UserEntity ue  = userService.getByName("tim91");
 		return ue.getId();
 		
+	}
+
+	@RequestMapping(value="/get/{id}")
+	public @ResponseBody UserEntity getById(@PathVariable int id) {
+		
+		UserEntity u = userService.getById(id);
+		return u;
 	}
 	
 	

@@ -11,15 +11,17 @@ import org.tstraszewski.model.BaseEntity;
 
 @Repository("baseDAO")
 public abstract class BaseDAOImpl<T extends BaseEntity> implements BaseDAO<T> {
-
 	
 	@Autowired
 	protected SessionFactory sessionFactory;
 	
 	private String getAllQuery = null;
 	
-	public BaseDAOImpl(String getAllQuery) {
+	private String className;
+	
+	public BaseDAOImpl(String getAllQuery,String className) {
 		this.getAllQuery = getAllQuery;
+		this.className = className;
 	}
 	
 	public void add(T u) {
@@ -32,8 +34,17 @@ public abstract class BaseDAOImpl<T extends BaseEntity> implements BaseDAO<T> {
 	}
 	
 	public List<T> getAll() {
-		List l = this.sessionFactory.getCurrentSession().createQuery(this.getAllQuery).list();
+		List<T> l = this.sessionFactory.getCurrentSession().createQuery(this.getAllQuery).list();
 		return l;
+	}
+	
+	public T getById(int id){
+		String query = "FROM " + this.className + " where id=" + id;
+		List<T> l = this.sessionFactory.getCurrentSession().createQuery(query).list();
+		if(l.size() > 0){
+			return l.get(0);
+		}
+		return null;
 	}
 }
 

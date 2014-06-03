@@ -5,11 +5,13 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.tstraszewski.model.FlyHistoryEntity;
 import org.tstraszewski.model.UserEntity;
 import org.tstraszewski.service.FlyHistoryService;
@@ -61,12 +63,26 @@ public class FlyHistoryControllerImpl implements FlyHistoryController {
 		return entities;
 	}
 	
-	@RequestMapping(value="/byUserId")
-	public @ResponseBody List<Integer> getHistory(@RequestParam("userId") int userId){
+	@RequestMapping(value="/byUserId/{userId}")
+	public @ResponseBody List<FlyHistoryEntity> getHistory(@PathVariable int userId){
 		
 		System.out.println("Userid: " + userId);
-		List<Integer> li = flyHistoryService.getByUserId(userId);
+		List<FlyHistoryEntity> li = flyHistoryService.getByUserId(userId);
 		return li;
 	}
+
+	@RequestMapping(value="/byId/{id}")
+	public @ResponseBody FlyHistoryEntity getById(@PathVariable int id) {
+		// TODO Auto-generated method stub
+		FlyHistoryEntity e = flyHistoryService.getById(id);
+		return e;
+	}
+	
+	@RequestMapping(value="/byIdAndPlay/{id}")
+	public @ResponseBody String getByIdAndPlay(@PathVariable int id) {
+		System.out.println("asdasdasdas");
+		return "redirect:/index.html?aaa=4";
+	}
+
 	
 }
