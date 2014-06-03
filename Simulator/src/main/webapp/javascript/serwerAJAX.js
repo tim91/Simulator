@@ -12,6 +12,7 @@ var sendPost = function(uri,data,async,fun_){
 		  async:   async,
 		  processData: false,
 		  success: function(data, textStatus, xhr) {
+			  console.log(textStatus);
 			  console.log('post ok');
 			  if(async && fun_){
 				  console.log('Po wyslaniu:' + data.responseText);
@@ -46,7 +47,8 @@ var sendGet = function(uri,param,async,function_){
 	var res = jQuery.ajax({
 		type: "GET",
         url:    prefix+uri,
-        success: function(result) {
+        success: function(result,status,a,b) {
+        	console.log(status + ' ' + a + ' ' + b);
                      if(result.isOk == false)
                          alert(result.message);
                      else{

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <!DOCTYPE html>
 <html>
 	<head>
@@ -26,7 +28,7 @@
 		
 		<div class="nav-bar-div">
 			<ul class="nav nav-pills nav-bar">
-			  <li><a href="/Simulator/index.html">Home</a></li>
+			  <li><a href="/Simulator/index.htm">Home</a></li>
 			</ul>
 		</div>
 		

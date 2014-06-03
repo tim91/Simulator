@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- <!DOCTYPE html> -->
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="Author" content="Radosław Ziembiński"/>
-<meta name="Copyright" content="Poznań Universtiy of Technolgy, 2014"/>
+<!-- <meta charset="UTF-8"> -->
+<meta name="Author" content="RadosÅaw ZiembiÅski"/>
+<meta name="Copyright" content="PoznaÅ Universtiy of Technolgy, 2014"/>
 <meta name="Description" content="Laboratories: Technologie programistyczne systemy internetowe - teaching materials"/>
 
 <title>Symulator lotu</title>
@@ -32,7 +34,7 @@
 	
 	<div class="nav-bar-div">
 		<ul class="nav nav-pills nav-bar">
-		  <li><a href="/Simulator/history.html">History</a></li>
+		  <li><a href="/Simulator/historyPage.htm">History</a></li>
 		  <li><a id="logoutEl" href="/Simulator/logout">Logout</a></li>
 		</ul>
 	</div>
@@ -132,15 +134,15 @@
 			
 			<div class="startDataFormFields vels form-group">
 				<div class="col-md-4">
-					<label class="control-label" for="velX">Prędkość X:</label>
+					<label class="control-label" for="velX">PrÄdkoÅÄ X:</label>
 					<input id="velX" name="velX" class="form-control" type="text">
 				</div>
 				<div class="col-md-4">
-					<label class="control-label" for="velY">Prędkość Y:</label>
+					<label class="control-label" for="velY">PrÄdkoÅÄ Y:</label>
 			    	<input id="velY" name="velY" class="form-control" type="text">
 		    	</div>
 		    	<div class="col-md-4">
-			    	<label class="control-label" for="velZ">Prędkość Z:</label>
+			    	<label class="control-label" for="velZ">PrÄdkoÅÄ Z:</label>
 			    	<input id="velZ" name="velZ" class="form-control" type="text" required="required">
 		    	</div>
 			</div>

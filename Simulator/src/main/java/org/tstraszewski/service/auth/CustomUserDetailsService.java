@@ -19,33 +19,12 @@ import org.tstraszewski.service.UserService;
 @Service("customUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService,Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Autowired
 	UserService userService;
-	
-//	public Authentication authenticate(Authentication arg0)
-//			throws AuthenticationException {
-//		String name = arg0.getName();
-//		
-//		System.out.println("custom auth");
-//		UserEntity ue = userService.getByName(name);
-//		
-//		if(ue == null){
-//			return null;
-//		}
-//		
-//		
-//		String pass = (String)arg0.getCredentials();
-//		
-//		if(!ue.getPasswordHashed().equals(pass)){
-//			return null;
-//		}
-//		
-//		List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
-//        grantedAuths.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-//        Authentication auth = new UsernamePasswordAuthenticationToken(name, pass, grantedAuths);
-//		return auth;
-//		
-//	}
 
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
@@ -59,7 +38,7 @@ public class CustomUserDetailsService implements UserDetailsService,Serializable
 		}
 		
 		List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
-        grantedAuths.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
 		User user = new User(ue.getNickName(), ue.getPasswordHashed(), grantedAuths);
 		return user;
 	

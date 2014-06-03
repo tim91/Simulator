@@ -30,39 +30,30 @@
     </bean>
     
 -->
-<!-->
 
 <security:authentication-manager alias="baseAuthenticationManager">
 	<security:authentication-provider user-service-ref="customUserDetailsService"/>
 </security:authentication-manager>
--->
-<!--
-<security:authentication-manager id="digestAuthenticationManager">    
-	<security:authentication-provider user-service-ref="digestUserDetailsService"/>
-</security:authentication-manager>
--->
 
-<!--
-<bean id="digestAuthenticationManager" class="org.springframework.security.authentication.ProviderManager">
-    <constructor-arg>
-        <list>
-            <bean class="org.tstraszewski.service.auth.DigestUserDetailsService"/>
-        </list>
-    </constructor-arg>
-</bean>
--->
-<!-->
-	<security:http  auto-config="true" pattern="/rest/flyHistory/**" use-expressions="false" entry-point-ref="digestEntryPoint" authentication-manager-ref="digestAuthenticationManager">
-    	<security:intercept-url pattern="/rest/flyHistory/**" access="ROLE_ADMIN"/>
-        <security:custom-filter ref="digestFilter" after="BASIC_AUTH_FILTER"/>
+	
+    	
+	<security:http  auto-config="false" use-expressions="true">
+		<security:intercept-url pattern="/login.html" access="permitAll()"/>
+		<security:intercept-url pattern="/failure.html" access="permitAll()"/>
+		<security:intercept-url pattern="/css/**" access="permitAll()"/>
+		<security:intercept-url pattern="/javascript/**" access="permitAll()"/>
+    	<security:intercept-url pattern="/**" access="isAuthenticated()"/>
         
+		<security:form-login login-page="/login.html" default-target-url="/index.htm" authentication-failure-url="/failure.html"/>
+        <security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/login.html" delete-cookies="JSESSIONID"/>
+        <security:access-denied-handler error-page="/failure.html"/>
         
         <security:session-management>
-        	<security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
-    	</security:session-management>
+        	<security:concurrency-control max-sessions="1"/>
+ 		</security:session-management>
         
     </security:http>
--->
+
 <!-->
 <bean id="sas" class=
  "org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">
