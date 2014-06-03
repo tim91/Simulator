@@ -39,7 +39,15 @@ var play = function(el)
 	console.log(el);
 	var id = el.id;
 	if(id){
-		var h = getHistory(id);
+		//sprawdz localStorage
+		var fromLocal = localStorage.getItem('H'+id);
+		var h = null;
+		if(fromLocal){
+			console.log('Pobralem z localStorageL ' + fromLocal);
+			h = JSON.parse(fromLocal);
+		}else{
+			h = getHistory(id);
+		}
 		console.log(h);
 		redirect("/index.html?posX="+h.posX+"&posY="+h.posY+"&posZ="+h.posZ+"&velX="+h.velX+"&velY="+h.velY+"&velZ="+h.velZ);
 	}

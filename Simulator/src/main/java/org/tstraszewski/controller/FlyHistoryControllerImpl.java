@@ -31,7 +31,7 @@ public class FlyHistoryControllerImpl implements FlyHistoryController {
 	UserService userService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public void addHistory(@RequestBody final FlyHistoryEntity fhe) {
+	public @ResponseBody int addHistory(@RequestBody final FlyHistoryEntity fhe) {
 		
 		System.out.println("Dodaje historie: " + fhe);
 		
@@ -47,7 +47,9 @@ public class FlyHistoryControllerImpl implements FlyHistoryController {
 			logger.debug(fhe);
 		}
 		
-		flyHistoryService.add(fhe);
+		int id = flyHistoryService.add(fhe);
+		
+		return id;
 	}
 
 	public void deleteHistory(FlyHistoryEntity fhe) {

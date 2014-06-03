@@ -6,6 +6,25 @@ var getCurrentUserId = function(){
 	return r;
 };
 
+var saveHistory = function(vals){
+	var id = sendPost("/flyHistory",vals,false,null);
+	saveHistoryInLocalStorage(vals, id.responseText);
+}
+
+var saveHistoryInLocalStorage = function(vals,id){
+	if(typeof(Storage)!=="undefined")
+	{
+		console.log(id + ' zapisuje: ' + vals + ' localStorage');
+		localStorage.setItem('H'+id,vals);
+	}
+}
+
+var getCurrentUser = function(){
+	
+	var res = sendGet("/users",[],false,null);
+	return res.responseJSON;
+};
+
 var getAllHistory = function(userId,fun){
 	
 	var p = [];

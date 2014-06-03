@@ -1,23 +1,29 @@
 var appName = "/Simulator";
 var prefix = appName+"/rest";
 
-var sendPost = function(uri,data){
+var sendPost = function(uri,data,async,fun_){
 	
 	console.log("Wysylam dane na serwer: " + data);
 	
-	$.ajax({
+	var res = $.ajax({
 		  type: "POST",
 		  url: prefix + uri,
 		  data: data,
+		  async:   async,
 		  processData: false,
 		  success: function(data, textStatus, xhr) {
 			  console.log('post ok');
+			  if(async && fun_){
+				  console.log('Po wyslaniu:' + data.responseText);
+				  fun_(data);
+			  }
           },
           error: function(xhr, textStatus, errorThrown) {
         	  console.log('post fail');
           },
           contentType: "application/json",
 		});
+	return res;
 };
 
 var sendGet = function(uri,param,async,function_){

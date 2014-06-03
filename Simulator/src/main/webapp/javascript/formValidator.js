@@ -121,7 +121,7 @@ var applyFormValidator = function(){
         	tab['velY'] = parseFloat(velY);
         	tab['velZ'] = parseFloat(velZ);
         	
-            init(tab);
+            init(tab,true);
         }
     });
 }

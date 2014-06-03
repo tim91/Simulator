@@ -334,7 +334,6 @@ var stop = function(){
 }
 
 
-
 $(document).ready(function(){
 //	formFields.push('#posX');
 //	formFields.push('#posY');
@@ -371,7 +370,7 @@ $(document).ready(function(){
 	var params = checkStartParams();
 	
 	if(params){
-		init(params);
+		init(params,false);
 	}else{
 		//nie podano startowych paramterów
 		/*
@@ -384,6 +383,13 @@ $(document).ready(function(){
 		setVal('#velY',3);
 		setVal('#velZ',3);
 	}
+	
+	var u = getCurrentUser();
+	
+	var el =$('#logoutEl'); 
+	val = el.text();
+	val = val + ' '+ u.nickName;
+	el.text(val);
 	
 	});
 
@@ -417,7 +423,7 @@ var validate = function(vals){
 	return true;
 }
 
-var init = function(vals){
+var init = function(vals,saveHistory_){
 
 	if(plane.crashed == true){
 //		var vals = readDataFromForm();
@@ -432,13 +438,13 @@ var init = function(vals){
 		}
 		
 		startFlying(vals);
-		saveStartDataOnServer(vals);
 		renderPlots();
+		if(saveHistory_ && saveHistory_ == true){
+			saveStartData(vals);
+		}
 	}
 	
 };
-
-
 //
 //var readDataFromForm = function(){
 //	
@@ -473,11 +479,11 @@ var convertTimeFromServer = function(time){
 	return d;
 };
 
-var saveStartDataOnServer = function(vals){
+var saveStartData = function(vals){
 	
 	console.log("Wysylam dane na serwer....");
 	vals = JSON.stringify(vals);
-	sendPost("/flyHistory",vals);
+	saveHistory(vals);
 };
 
 var addClass = function (id,className){

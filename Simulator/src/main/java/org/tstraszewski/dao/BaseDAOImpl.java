@@ -1,11 +1,11 @@
 package org.tstraszewski.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import org.tstraszewski.model.BaseEntity;
 
 
@@ -24,8 +24,9 @@ public abstract class BaseDAOImpl<T extends BaseEntity> implements BaseDAO<T> {
 		this.className = className;
 	}
 	
-	public void add(T u) {
-		this.sessionFactory.getCurrentSession().save(u);
+	public int add(T u) {
+		Serializable s = this.sessionFactory.getCurrentSession().save(u);
+		return (Integer)s;
 	}
 
 	

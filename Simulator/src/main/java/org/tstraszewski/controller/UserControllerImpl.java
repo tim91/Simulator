@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,7 +40,6 @@ public class UserControllerImpl implements UserController {
 	}
 
 	@RequestMapping(value="/getAll",method = RequestMethod.GET)
-	
 	public @ResponseBody List<UserEntity> getAllUsers() {
 		// TODO Auto-generated method stub
 		return userService.getAll();
@@ -48,6 +48,7 @@ public class UserControllerImpl implements UserController {
 	@RequestMapping(value="/getId", method = RequestMethod.GET)
 	public @ResponseBody int getUserId() {
 		
+		//TODO sprawdzamy czy podany login jest loginem uzytkownika
 		UserEntity ue  = userService.getByName("tim91");
 		return ue.getId();
 		
@@ -56,8 +57,18 @@ public class UserControllerImpl implements UserController {
 	@RequestMapping(value="/get/{id}")
 	public @ResponseBody UserEntity getById(@PathVariable int id) {
 		
+		//TODO sprawdzamy czy user ktorego dostalismy jest aktualnie zalogowanym userem
 		UserEntity u = userService.getById(id);
 		return u;
+	}
+
+	@RequestMapping(method=RequestMethod.GET)
+	public @ResponseBody UserEntity getCurrentLogged() {
+		
+		//wyciagam z sesji
+		UserEntity ue  = userService.getByName("tim91");
+		return ue;
+		
 	}
 	
 	

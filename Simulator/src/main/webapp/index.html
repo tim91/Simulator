@@ -23,10 +23,20 @@
 <script type="text/javascript" src="javascript/simulator.js"></script>
 <script type="text/javascript" src="javascript/plot.js"></script>
 <script type="text/javascript" src="javascript/serwerAJAX.js"></script>
+<script type="text/javascript" src="javascript/services.js"></script>
 <script type="text/javascript" src="javascript/formValidator.js"></script>
 
 </head>
 <body>
+	<div>
+	
+	<div class="nav-bar-div">
+		<ul class="nav nav-pills nav-bar">
+		  <li><a href="/Simulator/history.html">History</a></li>
+		  <li><a id="logoutEl" href="/Simulator/logout">Logout</a></li>
+		</ul>
+	</div>
+	
 	<div id="view3d"></div>
 
 	<table class="results">
@@ -38,7 +48,6 @@
 				<td>Forces [N]</td>
 				<td>Position [m]</td>
 				<td>Height [m]</td>
-				<td><a href="/Simulator/logout">Wyloguj</a></td>
 			</tr>
 		</thead>
 		<tbody>
@@ -151,6 +160,6 @@
 	   <div id="speedPlot">
 		</div>
 	</div>
-
+</div>
 </body>
 </html>

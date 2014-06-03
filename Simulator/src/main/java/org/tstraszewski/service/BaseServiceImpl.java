@@ -15,8 +15,8 @@ public abstract class BaseServiceImpl<T extends BaseDAOImpl<S>, S extends BaseEn
 	@Autowired
 	protected T dao;
 
-	public void add(S u) {
-		this.dao.add(u);
+	public int add(S u) {
+		return this.dao.add(u);
 	}
 
 	public void delete(S u) {

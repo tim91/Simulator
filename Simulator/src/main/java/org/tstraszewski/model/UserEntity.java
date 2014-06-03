@@ -16,15 +16,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name="Users")
 public class UserEntity extends BaseEntity implements Serializable {
 	
-	@Column(unique=true, nullable=false)
+	@Column(unique=true, nullable=false,length=15)
+	@Length(min=4, max=15)
 	private String nickName;
+	@Column(length=15)
+	@Length(min=4, max=15)
 	private String firstName;
+	@Column(length=15)
+	@Length(min=4, max=15)
 	private String lastName;
-	@Column(nullable=false)
+	@Column(length=15,nullable=false)
 	@Length(min=6, max=15)
 	@JsonIgnore
 	private String passwordDigest;
-	@Column(nullable=false)
+	@Column(length=15,nullable=false)
 	@Length(min=6, max=15)
 	@JsonIgnore
 	private String passwordHashed;

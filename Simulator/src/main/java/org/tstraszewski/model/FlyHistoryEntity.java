@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.tstraszewski.model.validator.FlyHistoryParamterRange;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,14 +21,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class FlyHistoryEntity extends BaseEntity implements Serializable{
 	
 	@ManyToOne
+	@NotNull
 	private UserEntity user;
+	@NotNull
+	@FlyHistoryParamterRange()
 	private float posX;
+	@NotNull
+	@FlyHistoryParamterRange()
 	private float posY;
+	@NotNull
+	@FlyHistoryParamterRange()
 	private float posZ;
+	@NotNull
+	@FlyHistoryParamterRange()
 	private float velX;
+	@NotNull
+	@FlyHistoryParamterRange()
 	private float velY;
+	@NotNull
+	@FlyHistoryParamterRange(max=10.0f)
 	private float velZ;
 	
+	@NotNull
 	private long timeLong;
 	
 	public FlyHistoryEntity() {
@@ -108,5 +125,5 @@ public class FlyHistoryEntity extends BaseEntity implements Serializable{
 				+ ", velY=" + velY + ", velZ=" + velZ + ", timeLong="
 				+ timeLong + "]";
 	}
-
+	
 }

@@ -11,4 +11,5 @@ public interface UserController {
 	public void deleteUser(UserEntity u);
 	public List<UserEntity> getAllUsers();
 	public UserEntity getById(int id);
+	public UserEntity getCurrentLogged();
 }
