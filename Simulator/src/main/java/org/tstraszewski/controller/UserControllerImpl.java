@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tstraszewski.model.UserEntity;
 import org.tstraszewski.service.UserService;
@@ -48,8 +48,7 @@ public class UserControllerImpl implements UserController {
 	@RequestMapping(value="/getId", method = RequestMethod.GET)
 	public @ResponseBody int getUserId() {
 		
-		//TODO sprawdzamy czy podany login jest loginem uzytkownika
-		UserEntity ue  = userService.getByName("tim91");
+		UserEntity ue  = userService.getByName(getCurrentLoggedUserName());
 		return ue.getId();
 		
 	}
@@ -59,17 +58,27 @@ public class UserControllerImpl implements UserController {
 		
 		//TODO sprawdzamy czy user ktorego dostalismy jest aktualnie zalogowanym userem
 		UserEntity u = userService.getById(id);
-		return u;
+		
+		if(u.getNickName().equals(getCurrentLoggedUserName())){
+			return u;
+		}
+		
+		return null;
 	}
 
 	@RequestMapping(method=RequestMethod.GET)
 	public @ResponseBody UserEntity getCurrentLogged() {
 		
 		//wyciagam z sesji
-		UserEntity ue  = userService.getByName("tim91");
+		UserEntity ue  = userService.getByName(getCurrentLoggedUserName());
 		return ue;
 		
 	}
 	
+	private String getCurrentLoggedUserName(){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName();
+	    return name;
+	}
 	
 }

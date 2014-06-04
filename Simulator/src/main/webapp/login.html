@@ -1,35 +1,42 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="Author" content="Tomasz Straszewski"/>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Author" content="Tomasz Straszewski"/>
 
-<title>Strona logowania</title>
+		<title>Strona logowania</title>
 
-<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
-<link href="css/bootstrapValidator.min.css" rel="stylesheet" type="text/css" />
-<link href="css/login.css" rel="stylesheet" type="text/css" />
+		<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+		<link href="css/bootstrapValidator.min.css" rel="stylesheet" type="text/css" />
+		<link href="css/login.css" rel="stylesheet" type="text/css" />
 
+		<script type="text/javascript" src="javascript/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="javascript/bootstrap.min.js"></script>
+		<script type="text/javascript" src="javascript/bootstrapValidator.min.js"></script>
+		<script type="text/javascript" src="javascript/core-min.js"></script>
+		<script type="text/javascript" src="javascript/md5-min.js"></script>
+		<script type="text/javascript" src="javascript/loginForm.js"></script>
 
-<script type="text/javascript" src="javascript/bootstrap.min.js"></script>
-<script type="text/javascript" src="javascript/bootstrapValidator.min.js"></script>
-
-</head>
-<body>
-	<form name="loginForm" action="Simulator/j_spring_security_check" method="POST">
-		<div class="form-group">
-			<div class="col-md-4">
-				<label class="control-label" for="login">Login:</label>
-				<input id="login" type='text'  class="form-control" name='j_username'/>
+	</head>
+	<body>
+		<form id="loginForm" name="loginForm_" action="Simulator/j_spring_security_check" method="POST">
+			<div class="form-group">
+				<div class="col-md-4">
+					<label class="control-label" for="login">Login:</label>
+					<input id="login" type='text'  class="form-control" name='j_username'/>
+				</div>
+				<div class="col-md-4">
+					<label class="control-label" for="pass">Hasło:</label>
+					<input id="pass" type='password'  class="form-control" name='j_password' placeholder="******"/>
+				</div>
+				<button type="submit" class="btn btn-success">
+					Zaloguj
+				</button>
+				<button type="reset" class="btn btn-danger">
+					Rest
+				</button>
 			</div>
-			<div class="col-md-4">
-				<label class="control-label" for="pass">Hasło:</label>
-				<input id="pass" type='password'  class="form-control" name='j_password' placeholder="******"/>
-			</div>
-			<button type="submit" class="btn btn-success">Zaloguj</button>
-			<button type="reset" class="btn btn-danger">Rest</button>	
-		</div>
-        </form>
-</body>
+		</form>
+	</body>
 </html>

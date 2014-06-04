@@ -39,6 +39,7 @@
     	
 	<security:http  auto-config="false" use-expressions="true">
 		<security:intercept-url pattern="/login.html" access="permitAll()"/>
+		<security:intercept-url pattern="/Simulator/j_spring_security_check" access="permitAll()"/>
 		<security:intercept-url pattern="/failure.html" access="permitAll()"/>
 		<security:intercept-url pattern="/css/**" access="permitAll()"/>
 		<security:intercept-url pattern="/javascript/**" access="permitAll()"/>

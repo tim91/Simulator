@@ -25,12 +25,8 @@ public class UserEntity extends BaseEntity implements Serializable {
 	@Column(length=15)
 	@Length(min=4, max=15)
 	private String lastName;
-	@Column(length=15,nullable=false)
-	@Length(min=6, max=15)
-	@JsonIgnore
-	private String passwordDigest;
-	@Column(length=15,nullable=false)
-	@Length(min=6, max=15)
+	@Column(nullable=false)
+	@Length(min=6)
 	@JsonIgnore
 	private String passwordHashed;
 
@@ -62,14 +58,6 @@ public class UserEntity extends BaseEntity implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public String getPasswordDigest() {
-		return passwordDigest;
-	}
-
-	public void setPasswordDigest(String passwordDigest) {
-		this.passwordDigest = passwordDigest;
-	}
-
 	public String getPasswordHashed() {
 		return passwordHashed;
 	}
@@ -81,8 +69,7 @@ public class UserEntity extends BaseEntity implements Serializable {
 	@Override
 	public String toString() {
 		return "UserEntity [nickName=" + nickName + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", passwordDigest="
-				+ passwordDigest + ", passwordHashed=" + passwordHashed + "]";
+				+ ", lastName=" + lastName + ", passwordHashed=" + passwordHashed + "]";
 	}
 	
 	
