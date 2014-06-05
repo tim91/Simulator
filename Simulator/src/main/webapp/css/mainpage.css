@@ -34,6 +34,8 @@ Laboratories: Technologie programistyczne systemy internetowe - teaching materia
 
 #startDataForm{
 	display: table-caption;
+	float: left;
+	width: 30%;
 }
 
 .startDataFormFields{
@@ -63,4 +65,26 @@ Laboratories: Technologie programistyczne systemy internetowe - teaching materia
 
 .nav-bar-div{
 	background-color: #EEE;
+}
+
+#formHistoryDiv{
+	display : block;
+}
+
+.table-responsive{
+	float: right;
+	width: 70%;
+	margin-left: -30;
+}
+
+#formHistoryDiv{
+	height: 40%;
+}
+.historyDiv{
+	height: 200px;
+	overflow: auto;
+}
+
+#history-header{
+	text-align: center;
 }

@@ -39,7 +39,7 @@ public class FlyHistoryEntity extends BaseEntity implements Serializable{
 	@FlyHistoryParamterRange()
 	private float velY;
 	@NotNull
-	@FlyHistoryParamterRange(max=10.0f)
+	@FlyHistoryParamterRange()
 	private float velZ;
 	
 	@NotNull

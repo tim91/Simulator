@@ -20,7 +20,7 @@ var renderPlots = function () {
 
 		var updateInterval = 200;
 		//liczba widocznych punktów na wykresie
-		var dataLength = 500;
+		var dataLength = 10;
 
 		var updateAccelerationChart = function () {
 
@@ -391,6 +391,8 @@ $(document).ready(function(){
 	val = val + ' '+ u.nickName;
 	el.text(val);
 	
+	initHistoryPage();
+	
 	});
 
 
@@ -424,7 +426,7 @@ var validate = function(vals){
 }
 
 var init = function(vals,saveHistory_){
-
+	console.log('sdfsdfsdf');
 	if(plane.crashed == true){
 //		var vals = readDataFromForm();
 //		
@@ -492,7 +494,8 @@ var addClass = function (id,className){
 
 var removeChild = function(elementId){
 	var childs=document.getElementById(elementId);
-	childs.removeChild(childs.childNodes[0]);
+	if(childs.childNodes.length > 0)
+		childs.removeChild(childs.childNodes[0]);
 };
 
 var readStartData = function(){

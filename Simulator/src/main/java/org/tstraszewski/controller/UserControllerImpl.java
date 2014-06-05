@@ -75,7 +75,7 @@ public class UserControllerImpl implements UserController {
 		
 	}
 	
-	private String getCurrentLoggedUserName(){
+	public static String getCurrentLoggedUserName(){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String name = auth.getName();
 	    return name;

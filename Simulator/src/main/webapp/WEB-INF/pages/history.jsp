@@ -46,5 +46,12 @@
 				</tbody>
 			</table>
 		</div>
+		
+		
+		<div>
+			<form id="hiddenHistoryForm" action="/index.htm" method="POST">
+				<input type="hidden" name="historyId">
+			</form>
+		</div>
 	</body>
 </html>

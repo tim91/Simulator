@@ -17,6 +17,8 @@ import org.tstraszewski.model.UserEntity;
 import org.tstraszewski.service.FlyHistoryService;
 import org.tstraszewski.service.UserService;
 
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+
 @Controller
 @RequestMapping("/flyHistory")
 public class FlyHistoryControllerImpl implements FlyHistoryController {
@@ -31,14 +33,14 @@ public class FlyHistoryControllerImpl implements FlyHistoryController {
 	UserService userService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public @ResponseBody int addHistory(@RequestBody final FlyHistoryEntity fhe) {
+	public @ResponseBody String addHistory(@RequestBody final FlyHistoryEntity fhe) {
 		
 		System.out.println("Dodaje historie: " + fhe);
 		
 //		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //	    String name = auth.getName();
 //		
-	    UserEntity us = userService.getByName("tim91");
+	    UserEntity us = userService.getByName(UserControllerImpl.getCurrentLoggedUserName());
 	    
 	    fhe.setUser(us);
 	    
@@ -49,7 +51,13 @@ public class FlyHistoryControllerImpl implements FlyHistoryController {
 		
 		int id = flyHistoryService.add(fhe);
 		
-		return id;
+		fhe.getTimeLong();
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("{\"").append("id\":\"").append(id).append("\",\"timeLong\":\"").append(fhe.getTimeLong()).append("\"}");
+		String res = sb.toString();
+		System.out.println(res);
+		return res;
 	}
 
 	public void deleteHistory(FlyHistoryEntity fhe) {
