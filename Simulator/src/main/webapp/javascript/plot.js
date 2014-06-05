@@ -101,6 +101,8 @@ function insertTextNode(query) {
 	return v;
 }
 
+
+
 var startFlying = function(vals){
 	// XZ - horizontal plane, Y - height
 	plane = new Plane();
@@ -323,14 +325,14 @@ var clearAnimation = function(){
 }
 
 var stop = function(){
-	clearAnimation();
-	if(plane.crashed == true){
-//		removeChild("view3d");
-		removeChild("speedPlot");
-		removeChild("accelerationPlot");
-	}
-	renderer = null;
-//	location.reload();
+//	clearAnimation();
+//	if(plane.crashed == true){
+////		removeChild("view3d");
+//		removeChild("speedPlot");
+//		removeChild("accelerationPlot");
+//	}
+//	renderer = null;
+	location.reload();
 }
 
 

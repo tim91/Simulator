@@ -17,4 +17,4 @@ var r4;
 var he;
 var cr;
 
-var animationIntervalHandler;
+//var animationIntervalHandler;

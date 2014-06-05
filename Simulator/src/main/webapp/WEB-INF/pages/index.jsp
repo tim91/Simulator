@@ -156,7 +156,7 @@
 							</div>
 						</div>
 						<button type="submit" class="btn btn-success">Start</button>
-						<button type="reset" class="btn btn-danger" onclick="stop()">Stop</button>
+						<button class="btn btn-danger" onclick="stop()">Stop</button>
 					</form>
 				</div>
 				<div class="table-responsive">
