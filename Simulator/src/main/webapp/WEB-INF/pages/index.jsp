@@ -32,7 +32,6 @@
 <script type="text/javascript" src="javascript/services.js"></script>
 <script type="text/javascript" src="javascript/formValidator.js"></script>
 <script type="text/javascript" src="javascript/moment.min.js"></script>
-<script type="text/javascript" src="javascript/historyPage.js"></script>
 
 </head>
 <body>
@@ -158,6 +157,8 @@
 						<button type="submit" class="btn btn-success">Start</button>
 						<button class="btn btn-danger" onclick="stop()">Stop</button>
 					</form>
+					<button type="submit" class="btn btn-info" onclick="setCameraType('satelite')">Satelita</button>
+					<button type="submit" class="btn btn-info" onclick="setCameraType('normal')">Tryb normalny</button>
 				</div>
 				<div class="table-responsive">
 

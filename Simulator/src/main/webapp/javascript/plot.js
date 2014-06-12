@@ -101,7 +101,12 @@ function insertTextNode(query) {
 	return v;
 }
 
+var pauseFlag = false;
 
+var pause = function(){
+	console.log("pauza");
+	pauseFlag = true;
+};
 
 var startFlying = function(vals){
 	// XZ - horizontal plane, Y - height
@@ -220,6 +225,11 @@ var startFlying = function(vals){
 	}, false);
 
 	function animate() {
+		if(pauseFlag){
+			console.log("pauza.....");
+			return;
+		}
+		
 		requestAnimationFrame(animate);
 		if (plane.crashed == false) {
 			var mesh = objects[1];
@@ -229,7 +239,13 @@ var startFlying = function(vals){
 				//meshes[1].matrixAutoUpdate = false;
 				//meshes[1].updateMatrix();
 //				point = getPositionForCamera(x,y,z);
-				camera.position.set(plane.pos.x - 4000.0, plane.pos.y - 200.0, plane.pos.z);
+				if(cameraType == CAMERA_NORMAL){
+					camera.position.set(plane.pos.x - 4000.0, plane.pos.y - 200.0, plane.pos.z);
+				}
+				if(cameraType == CAMERA_SATELITE){
+					console.log("stelita");
+					camera.position.set(plane.pos.x - 4000.0, 7000, plane.pos.z);
+				}
 				camera.lookAt(plane.pos);
 				mesh.position.set(plane.pos.x, plane.pos.y, plane.pos.z);
 				grid.position.set(plane.pos.x, 0.0, plane.pos.z);
@@ -265,6 +281,12 @@ var startFlying = function(vals){
 		if (plane.crashed == true) {
 			return;
 		}
+		
+		if(pauseFlag){
+			console.log("pauza.....");
+			return;
+		}
+			
 
 		plane.calculateForces(deltaTime);
 		plane.fly(deltaTime);
@@ -317,6 +339,10 @@ var startFlying = function(vals){
 		
 	}, 10);
 };
+
+var isPaused = function(){
+	return pauseFlag;
+}
 
 var clearAnimation = function(){
 	plane.crashed = true;
@@ -378,12 +404,12 @@ $(document).ready(function(){
 		/*
 		 * For test
 		 */
-		setVal('#posX',3);
-		setVal('#posY',3);
-		setVal('#posZ',3);
-		setVal('#velX',3);
-		setVal('#velY',3);
-		setVal('#velZ',3);
+//		setVal('#posX',3);
+//		setVal('#posY',3);
+//		setVal('#posZ',3);
+//		setVal('#velX',3);
+//		setVal('#velY',3);
+//		setVal('#velZ',3);
 	}
 	
 	var u = getCurrentUser();
@@ -429,6 +455,7 @@ var validate = function(vals){
 
 var init = function(vals,saveHistory_){
 	console.log('sdfsdfsdf');
+	pauseFlag = false;
 	if(plane.crashed == true){
 //		var vals = readDataFromForm();
 //		
@@ -504,10 +531,10 @@ var readStartData = function(){
 	
 };
 
-var getPositionForCamera = function(x,y,z){
-	
-	/*
-	 * W zaleznosci od flagi
-	 */
-	return [x,y,z];
-};
+var CAMERA_NORMAL = "normal";
+var CAMERA_SATELITE = "satelite";
+
+var cameraType = CAMERA_NORMAL;
+var setCameraType = function(type){
+	cameraType = type;
+}

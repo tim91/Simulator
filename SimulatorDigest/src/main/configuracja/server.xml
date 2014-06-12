@@ -136,14 +136,16 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log." suffix=".txt"/>
 
-		  <Context docBase="C:\apache-tomcat-7.0.42_stare\wtpwebapps\SimulatorDigest" path="/SimulatorDigest" reloadable="true" source="org.eclipse.jst.j2ee.server:SimulatorDigest">
-			<Realm className="org.apache.catalina.realm.JDBCRealm" connectionName="postgres" connectionPassword="postgres" 
+      <Context docBase="C:\apache-tomcat-7.0.42_stare\wtpwebapps\Simulator" path="/Simulator" reloadable="true" source="org.eclipse.jst.j2ee.server:Simulator"/>
+	  <Context docBase="C:\apache-tomcat-7.0.42_stare\wtpwebapps\SimulatorDigest" path="/SimulatorDigest" reloadable="true" source="org.eclipse.jst.j2ee.server:SimulatorDigest">
+		<Realm className="org.apache.catalina.realm.JDBCRealm" connectionName="postgres" connectionPassword="postgres" 
 					connectionURL="jdbc:postgresql://localhost:5432/simulatorDigest" driverName="org.postgresql.Driver" 
 					roleNameCol="role" userCredCol="password" userNameCol="username" userRoleTable="user_roles" userTable="users"/>
 		  </Context>
-	 
-	 </Host>
-		
-	</Engine>
+	  </Host>
+    </Engine>
+	<Context>
+		<Realm className="org.apache.catalina.realm.JDBCRealm" connectionName="postgres" connectionPassword="postgres" connectionURL="jdbc:postgresql://localhost:5432/simulator" digest="MD5" driverName="org.postgresql.Driver" roleNameCol="role" userCredCol="password" userNameCol="username" userRoleTable="user_roles" userTable="users1"/>
+	</Context>
   </Service>
 </Server>

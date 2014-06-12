@@ -98,7 +98,6 @@ var play = function(el)
 			h = getHistory(id);
 		}
 		console.log(h);
-		stop();
 		init(h,false);
 		
 	}
